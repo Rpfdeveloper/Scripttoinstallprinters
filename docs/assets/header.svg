@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">CUPS Printer Installer</title>
+  <desc id="desc">Proyecto personal de automatización de impresión Linux. Bash, CUPS y pruebas automatizadas.</desc>
+  <rect width="1280" height="360" rx="24" fill="#0f172a"/>
+  <path d="M0 304h1280" stroke="#243249"/>
+  <rect x="54" y="48" width="10" height="28" rx="5" fill="#2dd4bf"/>
+  <text x="83" y="70" font-family="Arial, sans-serif" font-size="20" letter-spacing="3" fill="#5eead4">RPFDEVELOPER / PROYECTO PERSONAL</text>
+  <text x="54" y="157" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#f8fafc">CUPS Printer Installer</text>
+  <text x="57" y="207" font-family="Arial, sans-serif" font-size="25" fill="#cbd5e1">Automatización de impresoras en Linux</text>
+  <text x="57" y="265" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8">BASH  /  IPP EVERYWHERE  /  PPD LOCAL  /  DRY RUN</text>
+  <g transform="translate(1030 100)" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-linejoin="round">
+    <path d="M28 48V0h110v48"/>
+    <rect x="0" y="48" width="166" height="100" rx="14"/>
+    <path d="M28 113h110v78H28z" fill="#0f172a"/>
+    <path d="M48 137h70M48 158h50" stroke-width="5"/>
+    <circle cx="137" cy="76" r="4" fill="#2dd4bf" stroke="none"/>
+  </g>
+  <text x="57" y="338" font-family="Arial, sans-serif" font-size="17" fill="#94a3b8">ROBERTO PAJUELO  ·  SOPORTE TÉCNICO → DESARROLLO DE SOFTWARE</text>
+</svg>
