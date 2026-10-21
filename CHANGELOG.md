@@ -1,5 +1,13 @@
 # Historial de cambios
 
+## 1.0.1 — 2026-10-21
+
+- Comprobación del texto de estado de `lpstat -r`: su código de salida puede ser cero con CUPS detenido.
+- `LC_MESSAGES=C` explícito para que un idioma heredado no altere la lectura de estados y nombres de cola.
+- Tres nuevas pruebas de regresión; 28 pruebas automatizadas en total. La simulación también verifica que no se invoque `lpstat`.
+- Indicador de GitHub Actions y guía técnica en inglés para revisar el proyecto.
+- La validación con una impresora física sigue pendiente.
+
 ## 1.0.0 — 2026-10-20
 
 - Sustituido el menú incompleto por una CLI con parámetros y ayuda.

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Configure one local CUPS queue. Never downloads or executes vendor packages.
 set -euo pipefail
-export LC_ALL=C
+export LC_ALL=C LC_MESSAGES=C
 
-VERSION='1.0.0'
+VERSION='1.0.1'
 
 usage() {
     cat <<'HELP'
@@ -97,7 +97,10 @@ fi
 for tool in lpadmin lpstat; do
     command -v "$tool" >/dev/null 2>&1 || die "Required CUPS command not found: $tool." 3
 done
-lpstat -h localhost -r >/dev/null 2>&1 || die 'Local CUPS scheduler is unavailable.' 3
+# lpstat -r can exit successfully even when CUPS is stopped. Check its status
+# text as well; LC_MESSAGES is explicit because CUPS can prefer it to LC_ALL.
+scheduler_status=$(lpstat -h localhost -r 2>/dev/null) || die 'Local CUPS scheduler is unavailable.' 3
+[[ $scheduler_status == 'scheduler is running' ]] || die 'Local CUPS scheduler is unavailable or its status could not be confirmed.' 3
 queues=$(lpstat -h localhost -p 2>/dev/null) || die 'Unable to inspect existing queues; no changes made.' 3
 exists=false
 while read -r kind queue rest; do

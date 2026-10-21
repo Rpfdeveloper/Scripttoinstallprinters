@@ -9,11 +9,15 @@
 
 # CUPS Printer Installer
 
+[![Installer checks](https://github.com/Rpfdeveloper/Scripttoinstallprinters/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/Rpfdeveloper/Scripttoinstallprinters/actions/workflows/checks.yml)
+
 Herramienta para crear y actualizar una cola de impresión local en Linux con CUPS. Admite **IPP Everywhere** y archivos **PPD locales**, con validación previa y un modo de simulación que permite revisar el comando sin contactar con CUPS.
 
 Proyecto personal de **Roberto Pajuelo**, nacido de mi experiencia en diagnóstico y reparación de impresoras y equipos multifunción. El prototipo original se centraba en menús por fabricante; esta versión separa la configuración de la cola de la selección del controlador.
 
 **English:** A Bash CLI for configuring local Linux CUPS queues, using IPP Everywhere or a trusted local PPD. Includes dry-run mode and automated tests with mocked CUPS commands. Hardware compatibility has not been certified.
+
+[Guía técnica para revisar el código (English)](docs/ENGINEERING.md) · [Validación con hardware](docs/VALIDATION.md) · [Historial de cambios](CHANGELOG.md)
 
 ## Qué demuestra
 
@@ -23,8 +27,9 @@ Proyecto personal de **Roberto Pajuelo**, nacido de mi experiencia en diagnósti
 | Revisar antes de modificar el sistema | `--dry-run` valida las entradas y muestra el comando. |
 | Evitar cambios accidentales en colas existentes | Se requiere `--update` para una cola ya creada, incluso si cambia la capitalización del nombre. |
 | Manejar espacios y entradas del usuario | Comando construido con un array Bash; sin `eval`. |
-| Detectar errores de CUPS | Comprobación del servicio, inventario de colas y verificación posterior. |
-| Probar sin una impresora | 25 pruebas automatizadas con comandos CUPS simulados. |
+| Detectar errores de CUPS | Comprobación explícita del estado del servicio, inventario de colas y verificación posterior. |
+| Mantener la protección en sistemas con otro idioma | `LC_ALL=C` y `LC_MESSAGES=C` para interpretar las respuestas de CUPS. |
+| Probar sin una impresora | 28 pruebas automatizadas con comandos CUPS simulados. |
 
 ## Requisitos
 
@@ -113,7 +118,7 @@ bash -n install-printer.sh InstaladorDriberLinux.sh
 python3 -m unittest discover -s tests -v
 ```
 
-Las 25 pruebas comprueban argumentos, selección del controlador, URI, rutas con espacios, tratamiento literal de los textos, simulación, colas existentes y errores del servicio. Los comandos `lpadmin` y `lpstat` se sustituyen por dobles de prueba: **no se configura una impresora real**.
+Las 28 pruebas comprueban argumentos, selección del controlador, URI, rutas con espacios, tratamiento literal de los textos, simulación, colas existentes y errores del servicio. Incluyen regresiones para CUPS detenido con código de salida cero, respuestas de estado no reconocidas y configuración de idioma heredada. Los comandos `lpadmin` y `lpstat` se sustituyen por dobles de prueba: **no se configura una impresora real**.
 
 Validación realizada: sintaxis Bash y suite automatizada en Linux. La instalación con CUPS y un dispositivo físico queda pendiente de una prueba de integración. No se afirma compatibilidad certificada con Sharp, Toshiba o Konica Minolta.
 
@@ -132,6 +137,7 @@ Validación realizada: sintaxis Bash y suite automatizada en Linux. La instalaci
 - [`install-printer.sh`](install-printer.sh): CLI y validación.
 - [`InstaladorDriberLinux.sh`](InstaladorDriberLinux.sh): entrada de compatibilidad con el nombre original; acepta las nuevas opciones.
 - [`tests/test_installer.py`](tests/test_installer.py): pruebas sin impresora.
+- [`docs/ENGINEERING.md`](docs/ENGINEERING.md): guía de lectura, decisiones técnicas y regresiones, en inglés.
 - [`docs/VALIDATION.md`](docs/VALIDATION.md): procedimiento de comprobación con hardware.
 - [`CHANGELOG.md`](CHANGELOG.md): evolución del proyecto.
 
